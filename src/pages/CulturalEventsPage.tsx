@@ -123,7 +123,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/stepsync-poster.jpg" // Updated image path
+      image: "/images/posters/stepsynk.jpg" 
     },
     {
       title: "NRITYA VEDIKA",
@@ -151,7 +151,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/nrityavedika-poster.jpg" // Updated image path
+      image: "/images/posters/britya veduka.jpg"
     },
     {
       title: "ECHOES & STRINGS",
@@ -179,7 +179,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/echoes-poster.jpg" // Updated image path
+      image: "/images/posters/echoed strangel.jpg"
     },
     {
       title: "RESONANCE",
@@ -205,7 +205,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/resonance-poster.jpg" // Updated image path
+      image: "/images/posters/resonance.jpg"
     },
     {
       title: "COSMIC DRIFT",
@@ -235,7 +235,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/cosmicdrift-poster.jpg" // Updated image path
+      image: "/images/posters/cosmic drift.jpg"
     },
     {
       title: "EKPHRASTIC POETRY",
@@ -265,7 +265,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/poetry-poster.jpg" // Updated image path
+      image: "/images/posters/poetry.jpg"
     },
     {
       title: "TALE REWIND",
@@ -296,7 +296,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/talerewind-poster.jpg" // Updated image path
+      image: "/images/posters/tale rewind.jpg"
     },
     {
       title: "JUST A MINUTE (JAM)",
@@ -319,7 +319,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/jam-poster.jpg" // Updated image path
+      image: "/images/posters/just s minut.jpg"
     },
     {
       title: "WAVE YOUR STORY",
@@ -342,7 +342,7 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/waveyourstory-poster.jpg" // Updated image path
+      image: "/images/posters/wave the falge.jpg"
     },
     {
       title: "SHORT FILM MAKING",
@@ -365,28 +365,129 @@ const CulturalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/cultural/shortfilm-poster.jpg" // Updated image path
+      image: "/images/posters/ather frames.jpg"
+    },
+    {
+      title: "CAPTURE THE MOMENT",
+      description: "Photography competition to showcase visual storytelling skills.",
+      venue: "FET",
+      registrationFee: "₹250",
+      teamSize: "Individual",
+      contact: "Samarth Khanadale (9611744161)",
+      details: (
+        <>
+          <h4>Theme:</h4>
+          <p>Urban Life & Nature's Resilience</p>
+          
+          <h4>Guidelines:</h4>
+          <ul>
+            <li>Maximum 3 entries per participant</li>
+            <li>Photos must be taken during the event period</li>
+            <li>Basic editing allowed (no compositing or heavy manipulation)</li>
+            <li>Submission deadline: March 27, 6 PM</li>
+          </ul>
+          
+          <h4>Judging Criteria:</h4>
+          <ul>
+            <li>Composition</li>
+            <li>Technical quality</li>
+            <li>Creativity</li>
+            <li>Storytelling</li>
+            <li>Theme relevance</li>
+          </ul>
+        </>
+      ),
+      image: "/images/posters/capture the moment.jpg"
+    },
+    {
+      title: "MOTION FUSION",
+      description: "Videography competition for creating compelling short video content.",
+      venue: "FET",
+      registrationFee: "₹350",
+      teamSize: "1-2 members",
+      contact: "Anushree Panatula (6360393131)",
+      details: (
+        <>
+          <h4>Challenge:</h4>
+          <p>Create a 60-90 second video on the given theme</p>
+          
+          <h4>Theme:</h4>
+          <p>Transitions: Between Worlds</p>
+          
+          <h4>Guidelines:</h4>
+          <ul>
+            <li>All footage must be captured during the event period</li>
+            <li>Editing and post-production allowed</li>
+            <li>Background music must be royalty-free or original</li>
+            <li>Submission deadline: March 28, 12 PM</li>
+          </ul>
+          
+          <h4>Judging Criteria:</h4>
+          <ul>
+            <li>Cinematography</li>
+            <li>Editing techniques</li>
+            <li>Creativity</li>
+            <li>Storytelling</li>
+            <li>Audio integration</li>
+          </ul>
+        </>
+      ),
+      image: "/images/posters/motion fusion.jpg"
     }
   ];
 
   return (
     <div className="events-page">
-      <div className="events-hero">
+      <div className="events-hero cultural-hero">
+        <div className="hero-particles">
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+        </div>
         <div className="events-hero-content">
-          <h1>Cultural Events</h1>
-          <p>Express yourself through art, music, dance and more at Infinity 2025</p>
-          <p><strong>Date:</strong> March 27-28, 2023</p>
-          <div className="hero-logo">
-            <img 
-              src="/images/cultural logo.png" 
-              alt="Cultural Logo" 
-              className="cultural-logo" 
-            />
+          <div className="hero-badge">Cultural Events</div>
+          <h1>Express. Create. Inspire.</h1>
+          <p className="hero-description">
+            Unleash your creativity and artistic talents through performances, competitions, 
+            and expressive platforms designed to celebrate diverse cultural artforms.
+          </p>
+          <div className="hero-details">
+            <div className="hero-detail">
+              <i className="fas fa-calendar-alt"></i> March 28-30, 2025
+            </div>
+            <div className="hero-detail">
+              <i className="fas fa-map-marker-alt"></i> Colosseum, FET
+            </div>
+            <div className="hero-detail">
+              <i className="fas fa-music"></i> 12+ Cultural Events
+            </div>
           </div>
+          <div className="hero-cta">
+            <Link to="/register" className="btn-cta">Register Now</Link>
+            <a href="#events-list" className="btn-secondary">
+              <i className="fas fa-arrow-down"></i> Explore Events
+            </a>
+          </div>
+        </div>
+        <div className="hero-image">
+          <img 
+            src="/images/cultural-events-hero.png" 
+            alt="Cultural Events" 
+            onError={(e) => {
+              e.currentTarget.src = "/images/placeholder.jpg";
+              e.currentTarget.classList.add("fallback-image");
+            }}
+          />
         </div>
       </div>
 
-      <div className="content-container">
+      <div className="content-container" id="events-list">
+        <div className="section-header">
+          <h2>Our Cultural Events</h2>
+          <p>Showcase your talent in these exciting cultural competitions</p>
+        </div>
         <div className="events-container">
           {events.map((event, index) => (
             <EventCard key={index} {...event} />

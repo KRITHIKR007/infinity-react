@@ -747,6 +747,19 @@
   transform: scale(1.05);
 }
 
+.qr-code-wrapper.active .qr-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: white;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
 .qr-code {
   max-width: 300px;
   margin: 0 auto;
@@ -884,7 +897,7 @@
 }
 
 .payment-instructions ol li strong {
-  color: var(--primary-light);
+  color: var (--primary-light);
 }
 
 .form-actions {
@@ -1149,6 +1162,101 @@
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
+}
+
+/* Event type badge in payment summary */
+.event-type-badge {
+  font-size: 0.9rem;
+  background: var(--primary);
+  color: white;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.payment-type-notice {
+  display: flex;
+  gap: var(--space-sm);
+  background: rgba(157, 78, 221, 0.1);
+  border-left: 3px solid var(--primary);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  border-radius: var(--border-radius-sm);
+}
+
+.payment-type-notice i {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-top: 2px;
+}
+
+.payment-type-notice p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Event category restriction notice */
+.event-category-restriction-notice {
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 4px solid #ffc107;
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  gap: var(--space-md);
+  border-radius: var(--radius-sm);
+}
+
+.event-category-restriction-notice i {
+  font-size: 2rem;
+  color: #ffc107;
+  flex-shrink: 0;
+}
+
+.restriction-info h4 {
+  color: #ffc107;
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.restriction-info p {
+  margin: 0;
+  margin-bottom: var(--space-sm);
+  color: var(--text-light);
+}
+
+.selected-category {
+  background: rgba(157, 78, 221, 0.1);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.reset-selection {
+  background: rgba(157, 78, 221, 0.2);
+  color: var(--primary-light);
+  border: none;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s var(--ease-out);
+}
+
+.reset-selection:hover {
+  background: rgba(157, 78, 221, 0.3);
+}
+
+.category-specific-payment {
+  font-weight: 600;
+  color: var(--primary-lighter);
 }
 
 /* Animation keyframes */

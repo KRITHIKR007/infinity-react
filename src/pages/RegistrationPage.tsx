@@ -21,6 +21,7 @@ const RegistrationPage = () => {
   const [eventType, setEventType] = useState<'technical' | 'cultural' | ''>('');
   const [paymentScreenshot, setPaymentScreenshot] = useState<File | null>(null);
   const [step, setStep] = useState(1); // Track current step in registration process
+  const [selectedEventType, setSelectedEventType] = useState<'none' | 'technical' | 'cultural'>('none');
 
   // Events from Infinity 2K25
   const technicalEvents = [
@@ -145,26 +146,48 @@ const RegistrationPage = () => {
     const { value, checked } = e.target;
     
     if (checked) {
-      // If this is the first event selected, update selected event and event type
-      if (formData.events.length === 0) {
-        setSelectedEvent(value);
-        setEventType(getEventType(value));
-        setShowTeamFields(isTeamEvent(value));
-        
-        // Adjust team members array based on minimum requirements
-        if (isTeamEvent(value)) {
-          const requirement = getTeamSizeRequirement(value);
-          const minSize = parseInt(requirement.split('-')[0]) || 2;
-          const teamMembers = Array(minSize).fill('');
-          setFormData(prev => ({ ...prev, teamMembers }));
-        }
-      }
+      // Determine if this is a technical or cultural event
+      const isTechnicalEvent = technicalEvents.includes(value);
+      const eventType = isTechnicalEvent ? 'technical' : 'cultural';
       
-      setFormData(prev => ({ ...prev, events: [...prev.events, value] }));
+      // If this is the first event selected or matches the current event type
+      if (selectedEventType === 'none' || selectedEventType === eventType) {
+        // Set the event type if this is the first selection
+        if (selectedEventType === 'none') {
+          setSelectedEventType(eventType);
+        }
+        
+        // If this is the first event selected, update selected event and event type
+        if (formData.events.length === 0) {
+          setSelectedEvent(value);
+          setEventType(getEventType(value));
+          setShowTeamFields(isTeamEvent(value));
+          
+          // Adjust team members array based on minimum requirements
+          if (isTeamEvent(value)) {
+            const requirement = getTeamSizeRequirement(value);
+            const minSize = parseInt(requirement.split('-')[0]) || 2;
+            const teamMembers = Array(minSize).fill('');
+            setFormData(prev => ({ ...prev, teamMembers }));
+          }
+        }
+        
+        // Add to events
+        setFormData(prev => ({ ...prev, events: [...prev.events, value] }));
+      } else {
+        // Prevent selection of mixed event types
+        e.target.checked = false;
+        alert(`You can only select ${selectedEventType} events in a single registration. Please complete this registration first or remove your current selections.`);
+      }
     } else {
       // Remove from events
       const updatedEvents = formData.events.filter(event => event !== value);
       setFormData(prev => ({ ...prev, events: updatedEvents }));
+      
+      // If no events remain selected, reset the event type restriction
+      if (updatedEvents.length === 0) {
+        setSelectedEventType('none');
+      }
       
       // If the unselected event was the selected one, reset
       if (value === selectedEvent) {
@@ -180,6 +203,14 @@ const RegistrationPage = () => {
         }
       }
     }
+  };
+
+  const isEventDisabled = (eventName: string): boolean => {
+    if (selectedEventType === 'none') return false;
+    
+    const isTechnicalEvent = technicalEvents.includes(eventName);
+    return (selectedEventType === 'technical' && !isTechnicalEvent) || 
+           (selectedEventType === 'cultural' && isTechnicalEvent);
   };
 
   const addTeamMember = () => {
@@ -222,6 +253,16 @@ const RegistrationPage = () => {
     
     if (formData.events.length === 0) {
       alert("Please select at least one event.");
+      return;
+    }
+    
+    // Check that all events are of the same type
+    const firstEvent = formData.events[0];
+    const firstEventType = getEventType(firstEvent);
+    const hasInconsistentEventTypes = formData.events.some(event => getEventType(event) !== firstEventType);
+    
+    if (hasInconsistentEventTypes) {
+      alert("You can only register for either Technical or Cultural events in a single transaction. Please adjust your selection.");
       return;
     }
     
@@ -572,9 +613,27 @@ const RegistrationPage = () => {
           <div className="form-step">
             <div className="form-card">
               <div className="events-section">
-                <p className="event-selection-info">
-                  <i className="fas fa-info-circle"></i> You can register for multiple events. Each event has a separate registration fee.
-                </p>
+                <div className="event-category-restriction-notice">
+                  <i className="fas fa-exclamation-circle"></i>
+                  <div className="restriction-info">
+                    <h4>Important Registration Information</h4>
+                    <p>You can only register for events from one category (Technical OR Cultural) in a single transaction. If you want to participate in both types of events, please complete separate registrations.</p>
+                    {selectedEventType !== 'none' && (
+                      <div className="selected-category">
+                        <strong>Currently selecting:</strong> {selectedEventType === 'technical' ? 'Technical Events' : 'Cultural Events'}
+                        <button 
+                          className="reset-selection" 
+                          onClick={() => {
+                            setSelectedEventType('none');
+                            setFormData(prev => ({...prev, events: []}));
+                          }}
+                        >
+                          Reset Selection
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
                 
                 <div className="event-category">
                   <div className="category-header">
@@ -585,13 +644,15 @@ const RegistrationPage = () => {
                     {technicalEvents.map(event => (
                       <label 
                         key={event} 
-                        className={`event-card ${formData.events.includes(event) ? 'selected' : ''}`}
+                        className={`event-card ${formData.events.includes(event) ? 'selected' : ''} 
+                        ${isEventDisabled(event) ? 'disabled' : ''}`}
                       >
                         <input 
                           type="checkbox" 
                           value={event}
                           checked={formData.events.includes(event)}
                           onChange={handleCheckboxChange}
+                          disabled={isEventDisabled(event)}
                         />
                         <div className="event-card-content">
                           <span className="event-name">{event}</span>
@@ -618,13 +679,15 @@ const RegistrationPage = () => {
                     {culturalEvents.map(event => (
                       <label 
                         key={event} 
-                        className={`event-card ${formData.events.includes(event) ? 'selected' : ''}`}
+                        className={`event-card ${formData.events.includes(event) ? 'selected' : ''} 
+                        ${isEventDisabled(event) ? 'disabled' : ''}`}
                       >
                         <input 
                           type="checkbox" 
                           value={event}
                           checked={formData.events.includes(event)}
                           onChange={handleCheckboxChange}
+                          disabled={isEventDisabled(event)}
                         />
                         <div className="event-card-content">
                           <span className="event-name">{event}</span>
@@ -743,7 +806,20 @@ const RegistrationPage = () => {
           <div className="form-step">
             <div className="form-card payment-card">
               <div className="registration-summary">
-                <h3><i className="fas fa-receipt"></i> Registration Summary</h3>
+                <h3>
+                  <i className="fas fa-receipt"></i> Registration Summary {' '}
+                  <span className="event-type-badge">
+                    {selectedEventType === 'technical' ? 'Technical Events' : 'Cultural Events'}
+                  </span>
+                </h3>
+                
+                {/* Add clear notice about event type restriction */}
+                <div className="payment-type-notice">
+                  <i className="fas fa-info-circle"></i>
+                  <p>You can only register for {selectedEventType} events in a single transaction. 
+                  For other event types, please complete a separate registration.</p>
+                </div>
+                
                 <div className="summary-info">
                   <p><strong>Name:</strong> {formData.name}</p>
                   <p><strong>College:</strong> {formData.college}</p>
@@ -799,32 +875,37 @@ const RegistrationPage = () => {
                 {/* QR code payment section */}
                 {formData.paymentMethod === 'qrcode' && (
                   <div className="qr-payment-section">
-                    <h4><i className="fas fa-info-circle"></i> Scan the {eventType} Events QR Code</h4>
+                    <h4>
+                      <i className="fas fa-info-circle"></i> 
+                      Scan the {selectedEventType === 'technical' ? 'Technical' : 'Cultural'} Events QR Code
+                    </h4>
                     
                     <div className="qr-container">
-                      <div className={`qr-code-wrapper ${eventType === 'technical' ? 'active' : ''}`}>
-                        <div className="qr-code">
-                          <img 
-                            src={`${process.env.PUBLIC_URL}/images/payments/tech-event-qr.png`}
-                            alt="Technical Event Payment QR Code" 
-                            onError={handleQRCodeError}
-                          />
-                          {eventType === 'technical' && <div className="qr-badge">Use This QR</div>}
+                      {selectedEventType === 'technical' ? (
+                        <div className="qr-code-wrapper active">
+                          <div className="qr-code">
+                            <img 
+                              src={`${process.env.PUBLIC_URL}/images/payments/tech-event-qr.png`}
+                              alt="Technical Event Payment QR Code" 
+                              onError={handleQRCodeError}
+                            />
+                            <div className="qr-badge">Technical Events Payment</div>
+                          </div>
+                          <div className="qr-label">Technical Events</div>
                         </div>
-                        <div className="qr-label">Technical Events</div>
-                      </div>
-                      
-                      <div className={`qr-code-wrapper ${eventType === 'cultural' ? 'active' : ''}`}>
-                        <div className="qr-code">
-                          <img 
-                            src={`${process.env.PUBLIC_URL}/images/payments/cultural-event-qr.png`}
-                            alt="Cultural Event Payment QR Code" 
-                            onError={handleQRCodeError}
-                          />
-                          {eventType === 'cultural' && <div className="qr-badge">Use This QR</div>}
+                      ) : (
+                        <div className="qr-code-wrapper active">
+                          <div className="qr-code">
+                            <img 
+                              src={`${process.env.PUBLIC_URL}/images/payments/cultural-event-qr.png`}
+                              alt="Cultural Event Payment QR Code" 
+                              onError={handleQRCodeError}
+                            />
+                            <div className="qr-badge">Cultural Events Payment</div>
+                          </div>
+                          <div className="qr-label">Cultural Events</div>
                         </div>
-                        <div className="qr-label">Cultural Events</div>
-                      </div>
+                      )}
                     </div>
                     
                     <div className="payment-instructions">

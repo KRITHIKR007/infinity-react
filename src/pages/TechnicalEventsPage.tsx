@@ -438,7 +438,7 @@ const TechnicalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/tech/pitch4sustain-poster.jpg"
+      image: "/images/posters/pitch4sustain.jpg"
     },
     {
       title: "CTRL+Z – UNDO THE CHAOS",
@@ -475,7 +475,7 @@ const TechnicalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/tech/ctrlz-poster.jpg"
+      image: "/images/posters/ctrl+z.jpg"
     },
     {
       title: "SYNTAX SCRAMBLE",
@@ -503,7 +503,7 @@ const TechnicalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/tech/syntax-scramble-poster.jpg"
+      image: "/images/posters/syntax scrambel.jpg"
     },
     {
       title: "PHANTOM HUNT",
@@ -534,7 +534,7 @@ const TechnicalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/tech/phantom-hunt-poster.jpg"
+      image: "/images/posters/phnatum hunt.jpg"
     },
     {
       title: "INNOVATHON",
@@ -566,28 +566,130 @@ const TechnicalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/tech/innovathon-poster.jpg"
+      image: "/images/posters/innovation.jpg"
+    },
+    {
+      title: "MODEL BLITZ",
+      description: "3D Model Design Competition using SolidWorks.",
+      venue: "FET",
+      registrationFee: "₹200",
+      teamSize: "Individual",
+      organizer: "CAD Club",
+      details: (
+        <>
+          <h4>Format:</h4>
+          <p>Design 3D models based on given specifications</p>
+          
+          <h4>Software:</h4>
+          <ul>
+            <li>SolidWorks (will be provided)</li>
+          </ul>
+          
+          <h4>Judging Criteria:</h4>
+          <ul>
+            <li>Design accuracy & precision</li>
+            <li>Adherence to specifications</li>
+            <li>Time taken to complete</li>
+            <li>Innovative approaches</li>
+          </ul>
+          
+          <h4>Prizes:</h4>
+          <ul>
+            <li>🏆 1st Place: ₹3000 + Certificate</li>
+            <li>🥈 2nd Place: ₹1500 + Certificate</li>
+          </ul>
+        </>
+      ),
+      image: "/images/posters/model blitz.jpg"
+    },
+    {
+      title: "DRONEXTREME",
+      description: "Drone Payload Deployment Challenge testing precision and control.",
+      venue: "IIAME",
+      registrationFee: "₹400",
+      teamSize: "2-3 members",
+      organizer: "Aero Club",
+      details: (
+        <>
+          <h4>Challenge:</h4>
+          <p>Navigate drones through an obstacle course and deploy payloads at designated targets</p>
+          
+          <h4>Format:</h4>
+          <ul>
+            <li>Round 1: Qualification round - basic navigation</li>
+            <li>Round 2: Advanced course with payload deployment</li>
+          </ul>
+          
+          <h4>Equipment:</h4>
+          <ul>
+            <li>Drones will be provided, but participants can bring their own (subject to approval)</li>
+            <li>Payload mechanism must be designed by participants</li>
+          </ul>
+          
+          <h4>Prizes:</h4>
+          <ul>
+            <li>🏆 1st Place: ₹6000 + Certificate</li>
+            <li>🥈 2nd Place: ₹3000 + Certificate</li>
+            <li>🥉 3rd Place: ₹1500 + Certificate</li>
+          </ul>
+        </>
+      ),
+      image: "/images/posters/dron etream.jpg"
     }
   ];
 
   return (
     <div className="events-page">
-      <div className="events-hero">
+      <div className="events-hero tech-hero">
+        <div className="hero-particles">
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+        </div>
         <div className="events-hero-content">
-          <h1>Technical Events</h1>
-          <p>Challenge your skills and showcase your technical prowess</p>
-          <p><strong>Date:</strong> March 27-28, 2023</p>
-          <div className="hero-logo">
-            <img 
-              src="/images/cultural logo.png" 
-              alt="Cultural Logo" 
-              className="cultural-logo" 
-            />
+          <div className="hero-badge">Technical Events</div>
+          <h1>Innovate. Code. Engineer.</h1>
+          <p className="hero-description">
+            Challenge your technical skills and showcase your engineering prowess through 
+            cutting-edge competitions and hands-on challenges.
+          </p>
+          <div className="hero-details">
+            <div className="hero-detail">
+              <i className="fas fa-calendar-alt"></i> March 28-30, 2025
+            </div>
+            <div className="hero-detail">
+              <i className="fas fa-map-marker-alt"></i> IIAME Campus
+            </div>
+            <div className="hero-detail">
+              <i className="fas fa-trophy"></i> ₹50,000+ Prize Pool
+            </div>
           </div>
+          <div className="hero-cta">
+            <Link to="/register" className="btn-cta">Register Now</Link>
+            <a href="#events-list" className="btn-secondary">
+              <i className="fas fa-arrow-down"></i> Explore Events
+            </a>
+          </div>
+        </div>
+        <div className="hero-image">
+          <img 
+            src="/images/tech-events-hero.png" 
+            alt="Technical Events" 
+            onError={(e) => {
+              e.currentTarget.src = "/images/placeholder.jpg";
+              e.currentTarget.classList.add("fallback-image");
+            }}
+          />
         </div>
       </div>
 
-      <div className="content-container">
+      <div className="content-container" id="events-list">
+        <div className="section-header">
+          <h2>Our Technical Events</h2>
+          <p>Participate in these exciting technical challenges and competitions</p>
+        </div>
         <div className="events-container">
           {events.map((event, index) => (
             <EventCard key={index} {...event} />
