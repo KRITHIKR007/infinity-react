@@ -78,11 +78,6 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/credits" className={`nav-link ${location.pathname === '/credits' ? 'active' : ''}`}>
-              Credits
-            </Link>
-          </li>
           <li className="nav-item highlight">
             <Link to="/admin" className="btn-modern btn-navbar">
               <i className="fas fa-lock"></i> Admin

@@ -375,7 +375,14 @@ const CulturalEventsPage: React.FC = () => {
         <div className="events-hero-content">
           <h1>Cultural Events</h1>
           <p>Express yourself through art, music, dance and more at Infinity 2025</p>
-          <p><strong>Date:</strong> March 28, 2025</p>
+          <p><strong>Date:</strong> March 27-28, 2023</p>
+          <div className="hero-logo">
+            <img 
+              src="/images/cultural logo.png" 
+              alt="Cultural Logo" 
+              className="cultural-logo" 
+            />
+          </div>
         </div>
       </div>
 

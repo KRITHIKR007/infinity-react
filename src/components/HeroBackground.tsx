@@ -1,179 +1,211 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './HeroBackground.css';
+import heroBackground from '../assets/hero-bg'; // Import the background helper
 
-// Fallback image data URL for when the image can't be loaded
-const fallbackImageUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFdwI2Q3TiiwAAAABJRU5ErkJggg==';
-
-interface HeroBackgroundProps {
-  opacity?: number;
-  imageUrl?: string;
-  starsCount?: number;
-}
-
-interface StarProps {
-  top: string;
-  left: string;
-  size?: number;
-  delay?: number;
-}
-
-const Star: React.FC<StarProps> = ({ top, left, size = 2, delay = 0 }) => {
-  return (
-    <div
-      className="star"
-      style={{
-        top,
-        left,
-        width: `${size}px`,
-        height: `${size}px`,
-        animationDelay: `${delay}s`
-      }}
-    />
-  );
-};
-
-const HeroBackground: React.FC<HeroBackgroundProps> = ({ 
-  opacity = 0.85,
-  imageUrl = '/images/hero-bg.png',
-  starsCount = 100
-}) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const [fetLogoLoaded, setFetLogoLoaded] = useState(false);
-  const [infinityLogoLoaded, setInfinityLogoLoaded] = useState(false);
-  const [stars, setStars] = useState<StarProps[]>([]);
-  const publicUrl = process.env.PUBLIC_URL || '';
-  const fullImageUrl = publicUrl + imageUrl;
+// Define Particle class outside component to avoid re-creation on each render
+class Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  color: string;
+  maxWidth: number;
+  maxHeight: number;
   
-  // Preload the image for smooth display
-  useEffect(() => {
-    const img = new Image();
-    img.src = fullImageUrl;
-    img.onload = () => setImageLoaded(true);
-    img.onerror = () => {
-      console.error(`Failed to load image: ${fullImageUrl}`);
-      setImageError(true);
-    };
-  }, [fullImageUrl]);
-
-  // Add festival logos preload
-  useEffect(() => {
-    // Preload FET logo
-    const fetLogo = new Image();
-    fetLogo.src = publicUrl + '/images/FET-logoWhite.png';
-    fetLogo.onload = () => setFetLogoLoaded(true);
-
-    // Preload Infinity logo
-    const infinityLogo = new Image();
-    infinityLogo.src = publicUrl + '/images/INFINITY GOLD LOGO 24.png';
-    infinityLogo.onload = () => setInfinityLogoLoaded(true);
-  }, [publicUrl]);
-
-  // Generate random stars
-  useEffect(() => {
-    const newStars: StarProps[] = [];
+  constructor(canvasWidth: number, canvasHeight: number) {
+    this.maxWidth = canvasWidth;
+    this.maxHeight = canvasHeight;
+    this.x = Math.random() * canvasWidth;
+    this.y = Math.random() * canvasHeight;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
     
-    for (let i = 0; i < starsCount; i++) {
-      newStars.push({
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        size: Math.floor(Math.random() * 3) + 1,
-        delay: Math.random() * 5
-      });
+    // Create a more vibrant purple/violet gradient palette
+    const colors = [
+      'rgba(157, 78, 221, 0.8)',  // Primary purple - more opaque
+      'rgba(120, 60, 180, 0.7)',  // Darker purple
+      'rgba(180, 100, 240, 0.6)', // Lighter purple
+      'rgba(200, 120, 255, 0.5)'  // Violet
+    ];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+  
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    
+    // Bounce off edges
+    if (this.x > this.maxWidth || this.x < 0) this.speedX = -this.speedX;
+    if (this.y > this.maxHeight || this.y < 0) this.speedY = -this.speedY;
+  }
+  
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+const HeroBackground: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Set canvas size with high resolution for retina displays
+    const updateSize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      
+      // Reset styles after resize
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+    };
+    
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    
+    // Mouse interaction
+    const mouse = {
+      x: undefined as number | undefined,
+      y: undefined as number | undefined,
+      radius: 150 // Mouse influence radius
+    };
+    
+    canvas.addEventListener('mousemove', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    
+    canvas.addEventListener('mouseleave', function() {
+      mouse.x = undefined;
+      mouse.y = undefined;
+    });
+    
+    // Now that we have canvas dimensions, create particles
+    const particles: Particle[] = [];
+    const particleCount = Math.min(120, Math.floor(canvas.width / 8));
+    
+    for (let i = 0; i < particleCount; i++) {
+      // Pass canvas dimensions to Particle constructor
+      particles.push(new Particle(canvas.width, canvas.height));
     }
     
-    setStars(newStars);
-  }, [starsCount]);
+    // Connect particles with lines if they're close enough
+    const connectParticles = () => {
+      const maxDistance = 120;
+      
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < maxDistance) {
+            // Create a gradient for the connection line
+            const opacity = 0.2 * (1 - distance / maxDistance);
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(157, 78, 221, ${opacity})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+            ctx.closePath();
+          }
+        }
+      }
+    };
+    
+    // Animation loop
+    let animationId: number;
+    const animate = () => {
+      // Clear canvas with a slight fade effect for smoother animation
+      ctx.fillStyle = 'rgba(16, 0, 43, 0.2)'; // Dark background with opacity for trail effect
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw subtle grid pattern
+      ctx.lineWidth = 0.3;
+      ctx.strokeStyle = 'rgba(157, 78, 221, 0.1)';
+      
+      // Vertical lines - more spaced out for cleaner look
+      for (let x = 0; x <= canvas.width; x += 50) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      
+      // Horizontal lines
+      for (let y = 0; y <= canvas.height; y += 50) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+      
+      // Update and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        // Add mouse interaction
+        if (mouse.x !== undefined && mouse.y !== undefined) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Particles flee from mouse
+          if (distance < mouse.radius) {
+            const angle = Math.atan2(dy, dx);
+            const forceX = Math.cos(angle) * 0.5;
+            const forceY = Math.sin(angle) * 0.5;
+            
+            particles[i].x += forceX;
+            particles[i].y += forceY;
+          }
+        }
+        
+        particles[i].update();
+        particles[i].draw(ctx);
+      }
+      
+      connectParticles();
+      
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', updateSize);
+      canvas.removeEventListener('mousemove', function() {});
+      canvas.removeEventListener('mouseleave', function() {});
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
 
   return (
-    <div className="hero-background">
-      <div className="background-gradient">
-        <div 
-          className={`hero-bg ${imageLoaded || imageError ? 'loaded' : ''}`}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `url(${imageError ? fallbackImageUrl : fullImageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: imageLoaded || imageError ? opacity : 0,
-            transition: 'opacity 1s ease',
-            zIndex: -2,
-            filter: 'blur(3px)' // Lighter blur for better text readability while seeing background
-          }}
-        />
-        
-        {/* FET Logo in Hero Section - positioned mid-right and not blurred */}
-        {fetLogoLoaded && (
-          <div className="hero-logo-container fet-logo" style={{
-            position: 'absolute',
-            top: '50%',
-            right: '5%', // Positioned to mid-right
-            transform: 'translateY(-50%)',
-            zIndex: 1,
-            maxWidth: '300px', // Increased size for better visibility
-            filter: 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.5))' // Add shadow instead of blur
-          }}>
-            <img 
-              src={`${publicUrl}/images/FET-logoWhite.png`}
-              alt="FET Logo"
-              className="hero-logo fade-in"
-              style={{
-                maxWidth: '100%',
-                height: 'auto',
-                filter: 'none' // Ensure no blur on the logo itself
-              }}
-            />
-          </div>
-        )}
-        
-        {/* Infinity Gold Logo - positioned mid-left with rotation animation */}
-        {infinityLogoLoaded && (
-          <div className="hero-logo-container infinity-logo" style={{
-            position: 'absolute',
-            top: '50%',
-            left: '5%', // Positioned to mid-left (opposite of FET logo)
-            transform: 'translateY(-50%)',
-            zIndex: 1,
-            maxWidth: '250px', // Good size for visibility
-            filter: 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.3))' // Gold-tinted shadow
-          }}>
-            <img 
-              src={`${publicUrl}/images/INFINITY GOLD LOGO 24.png`}
-              alt="Infinity Logo"
-              className="hero-logo infinity-rotate fade-in"
-              style={{
-                maxWidth: '100%',
-                height: 'auto',
-                filter: 'none' // Ensure no blur on the logo itself
-              }}
-            />
-          </div>
-        )}
-        
-        <div className="orb"></div>
-        <div className="orb"></div>
+    <div 
+      className="hero-background-container"
+      style={{ backgroundImage: `url(${heroBackground})` }}
+    >
+      <div className="hero-orbs">
+        <div className="orb orb1"></div>
+        <div className="orb orb2"></div>
+        <div className="orb orb3"></div>
       </div>
-
-      {/* Animated orbs */}
-      <div className="background-orb orb-1"></div>
-      <div className="background-orb orb-2"></div>
-      <div className="background-orb orb-3"></div>
-      <div className="background-orb orb-4"></div>
-      
-      {/* Grid overlay */}
-      <div className="grid-overlay"></div>
-      
-      {/* Noise overlay */}
-      <div className="noise-overlay"></div>
-      
-      {/* Stars */}
-      {stars.map((star, index) => (
-        <Star key={index} {...star} />
-      ))}
+      <canvas ref={canvasRef} className="hero-canvas"></canvas>
+      <div className="hero-gradient-overlay"></div>
+      <div className="hero-glow"></div>
     </div>
   );
 };

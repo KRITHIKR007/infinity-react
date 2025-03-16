@@ -29,6 +29,30 @@
   z-index: 1;
 }
 
+/* Add styling for the cultural logo */
+.hero-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+}
+
+.cultural-logo {
+  height: 80px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(157, 78, 221, 0.6));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .events-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -184,24 +208,37 @@
   background: var(--gradient-card);
   backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow-glass), 0 10px 50px rgba(0, 0, 0, 0.5);
   border-radius: var(--border-radius-lg);
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px; /* Increased from 800px */
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  z-index: 1;
+  z-index: 10;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr; /* Changed from 1fr 1fr to give more space to content */
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Add animation for modal appearance */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .event-modal-close {
   position: absolute;
   top: var(--space-md);
   right: var(--space-md);
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.3);
   color: var(--text-light);
@@ -211,17 +248,19 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s var(--ease-out);
-  z-index: 2;
+  z-index: 20;
+  font-size: 18px;
 }
 
 .event-modal-close:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(220, 53, 69, 0.7);
   transform: scale(1.1);
 }
 
 .event-modal-image {
   height: 100%;
   overflow: hidden;
+  min-height: 400px; /* Added minimum height */
 }
 
 .event-modal-image img {
@@ -231,7 +270,9 @@
 }
 
 .event-modal-body {
-  padding: var(--space-xl);
+  padding: var(--space-2xl); /* Increased from --space-xl */
+  overflow-y: auto; /* Added to ensure content is scrollable */
+  max-height: 90vh; /* Ensure it doesn't exceed viewport height */
 }
 
 .event-details-grid {
@@ -275,10 +316,13 @@
 @media (max-width: 992px) {
   .event-modal-content {
     grid-template-columns: 1fr;
+    max-width: 90%; /* Use percentage for better mobile experience */
+    max-height: 80vh;
   }
   
   .event-modal-image {
     height: 300px;
+    min-height: auto;
   }
 }
 
@@ -414,6 +458,17 @@
   
   .event-details-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  
+  .hero-logo {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: var(--space-md) auto 0;
+  }
+  
+  .cultural-logo {
+    height: 60px;
   }
 }
 

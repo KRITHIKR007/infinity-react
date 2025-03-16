@@ -405,42 +405,40 @@ const TechnicalEventsPage: React.FC = () => {
   const events = [
     {
       title: "PITCH4SUSTAIN",
-      description: "Sustainability Hackathon focused on innovative solutions for environmental challenges.",
+      description: "Tackle real-world sustainability challenges with innovative solutions.",
       venue: "002",
       registrationFee: "₹500",
       teamSize: "1-5 members",
-      organizer: "$Echo, Anova, GDG on Campus, Zigbee",
+      organizer: "$Echo & Anova Teams",
       details: (
         <>
-          <h4>Objective:</h4>
-          <p>Solve sustainability challenges with a working prototype.</p>
+          <h4>Theme:</h4>
+          <p>Sustainable Development and Innovation</p>
           
-          <h4>Themes:</h4>
+          <h4>Format:</h4>
           <ul>
-            <li>Good Health & Well-being</li>
-            <li>Decent Work & Economic Growth</li>
-            <li>Zero Hunger</li>
-            <li>Affordable & Clean Energy</li>
-            <li>Sustainable Cities & Communities</li>
+            <li>Round 1: Idea Submission</li>
+            <li>Round 2: Prototype Development</li>
+            <li>Round 3: Final Pitch</li>
           </ul>
-          
-          <h4>Prototype Requirements:</h4>
-          <p>Must be functional (hardware/software/simulation)</p>
-          
-          <h4>Presentation Format:</h4>
-          <p>10-minute pitch + 5-minute Q&A</p>
           
           <h4>Judging Criteria:</h4>
           <ul>
-            <li>Innovation (20%)</li>
+            <li>Innovation & Creativity (25%)</li>
             <li>Technical Feasibility (25%)</li>
-            <li>Impact & Sustainability (20%)</li>
-            <li>Scalability (15%)</li>
-            <li>Presentation (20%)</li>
+            <li>Sustainability Impact (25%)</li>
+            <li>Presentation & Demo (25%)</li>
+          </ul>
+          
+          <h4>Prizes:</h4>
+          <ul>
+            <li>🏆 1st Place: ₹10,000 + Certificates</li>
+            <li>🥈 2nd Place: ₹5,000 + Certificates</li>
+            <li>🥉 3rd Place: ₹3,000 + Certificates</li>
           </ul>
         </>
       ),
-      image: "/images/events/tech/pitch4sustain-poster.jpg" // Updated image path
+      image: "/images/events/tech/pitch4sustain-poster.jpg"
     },
     {
       title: "CTRL+Z – UNDO THE CHAOS",
@@ -477,7 +475,7 @@ const TechnicalEventsPage: React.FC = () => {
           </ul>
         </>
       ),
-      image: "/images/events/tech/ctrlz-poster.jpg" // Updated image path
+      image: "/images/events/tech/ctrlz-poster.jpg"
     },
     {
       title: "SYNTAX SCRAMBLE",
@@ -490,119 +488,85 @@ const TechnicalEventsPage: React.FC = () => {
           <h4>Structure:</h4>
           <ul>
             <li>Round 1 (Blind Coding - 45 min): Write code without execution</li>
-            <li>Round 2 (Debugging - 25 min): Debug another participant's code</li>
-            <li>Round 3 (Execution & Judging - 20 min): Code is tested</li>
+            <li>Round 2 (Debugging - 30 min): Fix errors in given code</li>
           </ul>
           
-          <h4>Judging Criteria:</h4>
+          <h4>Languages:</h4>
           <ul>
-            <li>Accuracy (40%)</li>
-            <li>Efficiency (30%)</li>
-            <li>Debugging Skill (20%)</li>
-            <li>Creativity (10%)</li>
+            <li>C, C++, Java, Python</li>
           </ul>
-          
-          <h4>Disqualification Rules:</h4>
-          <p>Using online compilers or copying code</p>
           
           <h4>Prizes:</h4>
           <ul>
-            <li>🏆 1st Place: ₹3000</li>
-            <li>🥈 2nd Place: ₹1500</li>
-            <li>🥉 3rd Place: ₹500</li>
+            <li>🏆 1st Place: ₹2000 + Certificate</li>
+            <li>🥈 2nd Place: ₹1000 + Certificate</li>
           </ul>
         </>
       ),
-      image: "/images/events/tech/syntax-poster.jpg" // Updated image path
+      image: "/images/events/tech/syntax-scramble-poster.jpg"
     },
     {
       title: "PHANTOM HUNT",
-      description: "Cybersecurity CTF (Capture The Flag) challenge combining hacking skills and problem-solving.",
+      description: "Cybersecurity challenge featuring cryptography, steganography, and network security tasks.",
       venue: "FET",
       registrationFee: "₹500",
       teamSize: "4-5 members",
+      organizer: "Cybersecurity Club",
       details: (
         <>
-          <h4>Event Phases:</h4>
+          <h4>Format:</h4>
+          <p>Capture The Flag (CTF) competition with progressive challenges</p>
+          
+          <h4>Categories:</h4>
           <ul>
-            <li>Phase 1: CTF (QR codes, OSINT, encrypted messages)</li>
-            <li>Phase 2: Network analysis (packet tracing, cybersecurity puzzles)</li>
-            <li>Phase 3: Advanced cybersecurity tasks</li>
+            <li>Web Security</li>
+            <li>Cryptography</li>
+            <li>Steganography</li>
+            <li>Reverse Engineering</li>
+            <li>Network Security</li>
           </ul>
           
-          <h4>Rules:</h4>
+          <h4>Prizes:</h4>
           <ul>
-            <li>Only ethical hacking techniques allowed</li>
-            <li>No sharing answers between teams</li>
-            <li>Time limits apply, elimination in each phase</li>
+            <li>🏆 1st Place: ₹8000 + Certificate</li>
+            <li>🥈 2nd Place: ₹4000 + Certificate</li>
+            <li>🥉 3rd Place: ₹2000 + Certificate</li>
           </ul>
-          
-          <h4>Tools Used:</h4>
-          <p>Wireshark, Cisco Packet Tracer, encryption tools</p>
         </>
       ),
-      image: "/images/events/tech/phantom-poster.jpg" // Updated image path
+      image: "/images/events/tech/phantom-hunt-poster.jpg"
     },
     {
       title: "INNOVATHON",
-      description: "Product design and innovation competition focusing on emerging technologies.",
+      description: "24-hour innovation marathon to develop solutions for industry problems.",
       venue: "IIAME",
       registrationFee: "₹300",
       teamSize: "3-5 members",
       details: (
         <>
-          <h4>Objective:</h4>
-          <p>Brainstorm and develop solutions for a given problem statement</p>
+          <h4>Format:</h4>
+          <p>24-hour hackathon to design and prototype solutions</p>
           
-          <h4>General Rules:</h4>
+          <h4>Problem Statements:</h4>
+          <p>Industry challenges from partner companies</p>
+          
+          <h4>Resources Provided:</h4>
           <ul>
-            <li>Teams will be provided with a problem statement</li>
-            <li>Must develop a functional solution within the given timeframe</li>
-            <li>Must adhere to ethical standards</li>
+            <li>Workspace & Internet</li>
+            <li>Meals & Refreshments</li>
+            <li>Mentorship Sessions</li>
+            <li>Basic Components</li>
+          </ul>
+          
+          <h4>Prizes:</h4>
+          <ul>
+            <li>🏆 1st Place: ₹15,000 + Internship Opportunities</li>
+            <li>🥈 2nd Place: ₹7,500 + Certificates</li>
+            <li>🥉 3rd Place: ₹5,000 + Certificates</li>
           </ul>
         </>
       ),
-      image: "/images/events/tech/innovathon-poster.jpg" // Updated image path
-    },
-    {
-      title: "MODEL BLITZ",
-      description: "3D Model Design competition using SolidWorks.",
-      venue: "FET",
-      registrationFee: "₹250",
-      teamSize: "Individual",
-      details: (
-        <>
-          <h4>Software Used:</h4>
-          <p>SolidWorks</p>
-          
-          <h4>Task:</h4>
-          <p>Design models based on given problem statements</p>
-          
-          <h4>Note:</h4>
-          <p>No Physical Assembly Required</p>
-        </>
-      ),
-      image: "/images/events/tech/modelblitz-poster.jpg" // Updated image path
-    },
-    {
-      title: "DRONEXTREME",
-      description: "Drone challenge focusing on precision and control.",
-      venue: "IIAME",
-      registrationFee: "₹600",
-      teamSize: "2-3 members",
-      details: (
-        <>
-          <h4>Task:</h4>
-          <p>Deploy a payload at a target location</p>
-          
-          <h4>Rules:</h4>
-          <ul>
-            <li>Teams must bring their own drones</li>
-            <li>Only pre-approved models allowed</li>
-          </ul>
-        </>
-      ),
-      image: "/images/events/tech/drone-poster.jpg" // Updated image path
+      image: "/images/events/tech/innovathon-poster.jpg"
     }
   ];
 
@@ -611,8 +575,15 @@ const TechnicalEventsPage: React.FC = () => {
       <div className="events-hero">
         <div className="events-hero-content">
           <h1>Technical Events</h1>
-          <p>Showcase your technical skills and innovation at Infinity 2025</p>
-          <p><strong>Date:</strong> March 28, 2025</p>
+          <p>Challenge your skills and showcase your technical prowess</p>
+          <p><strong>Date:</strong> March 27-28, 2023</p>
+          <div className="hero-logo">
+            <img 
+              src="/images/cultural logo.png" 
+              alt="Cultural Logo" 
+              className="cultural-logo" 
+            />
+          </div>
         </div>
       </div>
 

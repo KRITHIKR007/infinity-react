@@ -54,9 +54,7 @@ const Footer = () => {
       <div className="footer-bottom">
         <p>&copy; {currentYear} Infinity 2025. All Rights Reserved.</p>
         <p className="credits">
-          <Link to="/credits">Credits</Link>
-          <span className="separator">|</span>
-          <Link to="/admin-login" className="admin-link">Admin</Link>
+          <Link to="/admin-login" className="admin-link">Admin Login</Link>
         </p>
       </div>
     </footer>

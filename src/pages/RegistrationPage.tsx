@@ -338,21 +338,27 @@ const RegistrationPage = () => {
   // Calculate total fee
   const calculateTotalFee = () => {
     return formData.events.reduce((total, event) => {
-      const fee = getEventFee(event);
-      // Extract the numeric value from the fee string (e.g. "₹500" => 500)
-      const amount = parseInt(fee.replace(/[^0-9]/g, '')) || 0;
-      return total + amount;
+      // Extract the numeric value from the fee string (e.g., "₹500" -> 500)
+      const feeString = getEventFee(event);
+      const feeMatch = feeString.match(/₹(\d+)/);
+      const fee = feeMatch ? parseInt(feeMatch[1]) : 0;
+      return total + fee;
     }, 0);
   };
 
   // Helper function to determine the current step's label
   const getStepLabel = (stepNumber: number) => {
     switch (stepNumber) {
-      case 1: return 'Personal Details';
-      case 2: return 'Event Selection';
-      case 3: return showTeamFields ? 'Team Information' : 'Payment';
-      case 4: return 'Payment';
-      default: return '';
+      case 1:
+        return "Personal Information";
+      case 2:
+        return "Event Selection";
+      case 3:
+        return "Team Details";
+      case 4:
+        return "Payment";
+      default:
+        return "Registration";
     }
   };
 
@@ -360,39 +366,36 @@ const RegistrationPage = () => {
   const goToNextStep = () => {
     // Basic validation before proceeding
     if (step === 1) {
-      if (!formData.name || !formData.email || !formData.phone || !formData.college || !formData.year) {
-        alert("Please fill all required personal details before proceeding.");
+      if (!formData.name || !formData.email || !formData.phone || !formData.college) {
+        alert("Please fill in all required fields");
         return;
       }
+      setStep(2);
     } else if (step === 2) {
       if (formData.events.length === 0) {
-        alert("Please select at least one event.");
+        alert("Please select at least one event");
         return;
       }
+      setStep(3);
     } else if (step === 3 && showTeamFields) {
-      if (!formData.teamName || formData.teamMembers.some(m => !m.trim())) {
-        alert("Please provide team name and all team member names.");
+      if (!formData.teamName || formData.teamMembers.some(member => !member)) {
+        alert("Please provide team details");
         return;
       }
+      setStep(4);
+      setShowPaymentInfo(true);
+    } else {
+      setStep(step + 1);
     }
-
-    setStep(prev => {
-      // Skip team step if no team events selected
-      if (prev === 2 && !showTeamFields) {
-        return 4;
-      }
-      return prev + 1;
-    });
   };
 
   const goToPreviousStep = () => {
-    setStep(prev => {
-      // Skip team step if no team events selected
-      if (prev === 4 && !showTeamFields) {
-        return 2;
+    if (step > 1) {
+      setStep(step - 1);
+      if (step === 4) {
+        setShowPaymentInfo(false);
       }
-      return prev - 1;
-    });
+    }
   };
 
   if (submitted) {
@@ -402,12 +405,13 @@ const RegistrationPage = () => {
           <i className="fas fa-check-circle"></i>
         </div>
         <h2>Registration Successful!</h2>
-        <p>Thank you for registering for Infinity 2025. We've sent confirmation details to your email.</p>
-        <p className="event-date">Event Date: March 28th, 2025</p>
-        <div className="registration-actions">
-          <button onClick={() => setSubmitted(false)} className="btn-secondary">Register Another Participant</button>
-          <button onClick={() => window.location.href = '/'} className="btn-primary">Return to Homepage</button>
-        </div>
+        <p>Thank you for registering for Infinity 2025. We've sent a confirmation email with your registration details.</p>
+        <button 
+          className="btn-modern"
+          onClick={() => window.location.href = "/"}
+        >
+          Return to Home
+        </button>
       </div>
     );
   }
@@ -418,7 +422,7 @@ const RegistrationPage = () => {
       
       <div className="event-info">
         <div className="event-date">
-          <i className="fas fa-calendar-alt"></i> March 28th, 2025
+          <i className="fas fa-calendar-alt"></i> March 28-30, 2025
         </div>
         <div className="event-location">
           <i className="fas fa-map-marker-alt"></i> Colosseum, FET, IIAME, 002
