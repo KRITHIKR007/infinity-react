@@ -81,7 +81,7 @@ const HomePage = () => {
           <p className="hero-subtitle animated fadeInUp delay-1">
             The Ultimate College Fest Experience
             <br />
-            <span className="event-date">March 28-30, 2025</span>
+            <span className="event-date">March 27-28, 2025</span>
           </p>
           
           <div className="hero-buttons animated fadeInUp delay-2">
@@ -103,15 +103,15 @@ const HomePage = () => {
           
           <div className="hero-stats">
             <div className="stat-item">
-              <div className="stat-number">15+</div>
+              <div className="stat-number">19+</div>
               <div className="stat-label">Events</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">₹5L+</div>
+              <div className="stat-number">₹2L+</div>
               <div className="stat-label">Prize Pool</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">3</div>
+              <div className="stat-number">2</div>
               <div className="stat-label">Days</div>
             </div>
           </div>
