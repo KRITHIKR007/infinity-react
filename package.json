@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run prepare-qr && react-scripts build",
+    "prepare-qr": "node scripts/prepare-vercel-deployment.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

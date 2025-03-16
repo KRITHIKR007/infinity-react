@@ -801,7 +801,7 @@ const RegistrationPage = () => {
                       <div className={`qr-code-wrapper ${eventType === 'technical' ? 'active' : ''}`}>
                         <div className="qr-code">
                           <img 
-                            src={`${process.env.PUBLIC_URL}/images/IMG_1787.PNG`}
+                            src={`${process.env.PUBLIC_URL}/images/payments/tech-event-qr.png`}
                             alt="Technical Event Payment QR Code" 
                             onError={handleQRCodeError}
                           />
@@ -813,7 +813,7 @@ const RegistrationPage = () => {
                       <div className={`qr-code-wrapper ${eventType === 'cultural' ? 'active' : ''}`}>
                         <div className="qr-code">
                           <img 
-                            src={`${process.env.PUBLIC_URL}/images/GooglePay_QR (2).png`}
+                            src={`${process.env.PUBLIC_URL}/images/payments/cultural-event-qr.png`}
                             alt="Cultural Event Payment QR Code" 
                             onError={handleQRCodeError}
                           />
