@@ -4,9 +4,23 @@ const path = require('path');
 console.log('Preparing for Vercel deployment...');
 
 // Create directories if they don't exist
+const imagesDir = path.join(__dirname, '../public/images');
 const paymentsDir = path.join(__dirname, '../public/images/payments');
-if (!fs.existsSync(paymentsDir)) {
-  fs.mkdirSync(paymentsDir, { recursive: true });
+
+try {
+  // Create parent directory first
+  if (!fs.existsSync(imagesDir)) {
+    console.log('Creating images directory...');
+    fs.mkdirSync(imagesDir, { recursive: true });
+  }
+  
+  // Then create subdirectory
+  if (!fs.existsSync(paymentsDir)) {
+    console.log('Creating payments directory...');
+    fs.mkdirSync(paymentsDir, { recursive: true });
+  }
+} catch (err) {
+  console.error('Error creating directories, but continuing:', err.message);
 }
 
 // Ensure placeholder image exists
