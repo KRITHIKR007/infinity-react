@@ -1,0 +1,1 @@
+# QR Code Setup InstructionsTo set up the QR code images for payment in the registration page:1. Create the directory structure if it doesn't already exist:

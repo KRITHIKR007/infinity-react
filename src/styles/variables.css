@@ -1,0 +1,147 @@
+:root {
+  /* Color System - Primary Palette */
+  --primary: #9d4edd;
+  --primary-dark: #7b2cbf;
+  --primary-light: #c77dff;
+  --primary-lighter: #e0aaff;
+  --primary-glow: #b14aff;
+  
+  /* Color System - Secondary Palette */
+  --secondary: #5a189a;
+  --secondary-dark: #3c096c;
+  --secondary-light: #7b2cbf;
+  --accent: #e0aaff;
+  
+  /* Base Colors */
+  --dark: #10002b;
+  --dark-light: #240046;
+  --dark-lighter: #3c096c;
+  
+  /* Text Colors */
+  --text-light: #f8f9fa;
+  --text-muted: #d8c2ff;
+  --text-dark: #212529;
+  --text-secondary: #9d4edd;
+  
+  /* Surface/Background Colors */
+  --surface-0: #10002b;
+  --surface-1: rgba(36, 0, 70, 0.7);
+  --surface-2: rgba(60, 9, 108, 0.8);
+  --surface-card: rgba(36, 0, 70, 0.6);
+  
+  /* UI Element Colors */
+  --divider: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(157, 78, 221, 0.3);
+  --border-light: rgba(224, 170, 255, 0.3);
+  --overlay-dark: rgba(16, 0, 43, 0.8);
+  --overlay-light: rgba(157, 78, 221, 0.1);
+  
+  /* Shadow System */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+  --shadow-primary: 0 5px 15px rgba(157, 78, 221, 0.3);
+  --shadow-glow: 0 0 15px rgba(157, 78, 221, 0.5);
+  --shadow-btn: 0 4px 12px rgba(157, 78, 221, 0.3);
+  --shadow-hover: 0 6px 20px rgba(157, 78, 221, 0.4);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --shadow-hover-glow: 0 8px 20px rgba(224, 170, 255, 0.5);
+  --shadow-text: 0 0 10px rgba(157, 78, 221, 0.5);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  
+  /* Gradient System */
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+  --gradient-dark: linear-gradient(135deg, var(--dark-light) 0%, var(--dark) 100%);
+  --gradient-glow: linear-gradient(rgba(157, 78, 221, 0.3), transparent);
+  --gradient-card: linear-gradient(145deg, rgba(36, 0, 70, 0.7), rgba(16, 0, 43, 0.9));
+  --gradient-button: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+  --gradient-hover: linear-gradient(to right, var(--secondary) 0%, var(--primary) 100%);
+  --gradient-text: linear-gradient(to right, var(--accent), var(--primary));
+  --gradient-border: linear-gradient(to right, var(--primary-light), var(--accent));
+  
+  /* Glass Effect */
+  --glass-background: rgba(16, 0, 43, 0.7);
+  --glass-border: 1px solid rgba(157, 78, 221, 0.18);
+  --glass-blur: blur(12px);
+  
+  /* Spacing System */
+  --space-3xs: 0.125rem; /* 2px */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 6rem;     /* 96px */
+  
+  /* Typography */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 2rem;     /* 32px */
+  --font-size-4xl: 2.5rem;   /* 40px */
+  --font-size-5xl: 3rem;     /* 48px */
+  --font-size-6xl: 4rem;     /* 64px */
+  
+  /* Font Weights */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Line Heights */
+  --line-height-xs: 1;
+  --line-height-sm: 1.25;
+  --line-height-md: 1.5;
+  --line-height-lg: 1.75;
+  --line-height-xl: 2;
+  
+  /* Border Radius */
+  --radius-xs: 0.125rem; /* 2px */
+  --radius-sm: 0.25rem;  /* 4px */
+  --radius-md: 0.5rem;   /* 8px */
+  --radius-lg: 0.75rem;  /* 12px */
+  --radius-xl: 1rem;     /* 16px */
+  --radius-2xl: 1.5rem;  /* 24px */
+  --radius-full: 9999px;
+  
+  /* Z-index System */
+  --z-background: -1;
+  --z-default: 1;
+  --z-elevated: 10;
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+  --z-maximum: 9999;
+  
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* For backwards compatibility with existing code */
+:root {
+  --border-radius-sm: var(--radius-sm);
+  --border-radius-md: var(--radius-md);
+  --border-radius-lg: var(--radius-lg);
+  --border-radius-xl: var(--radius-xl);
+  --border-radius-pill: var(--radius-full);
+  
+  /* Keeping the old names for spacing for compatibility */
+  --space-2xl: var(--space-3xl);
+  --space-xxl: var(--space-3xl);
+}

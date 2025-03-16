@@ -1,0 +1,70 @@
+/* Auto-generated CSS file - Online placeholder */
+
+.credits-page {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.credits-header {
+  text-align: center;
+  margin-bottom: var(--space-xxl);
+}
+
+.team-category {
+  margin-bottom: var(--space-xxl);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-xl);
+}
+
+.team-member {
+  background: var(--gradient-card);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+  transition: all 0.3s var(--ease-out);
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover-glow);
+}
+
+.team-member-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--space-md);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.team-social {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.team-social-link {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: var(--text-light);
+  transition: all 0.3s var(--ease-out);
+}
+
+.team-social-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}

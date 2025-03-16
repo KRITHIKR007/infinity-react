@@ -1,0 +1,171 @@
+/* Hero Background Component Styling */
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-orb {
+  position: absolute;
+  border-radius: 50%;
+  /* Significantly increase opacity and intensity of the gradient */
+  background: radial-gradient(circle at center, rgba(157, 78, 221, 1) 0%, rgba(157, 78, 221, 0.3) 60%, rgba(157, 78, 221, 0) 70%);
+  filter: blur(30px);
+  opacity: 1; /* Increased from 0.9 to full opacity */
+  transform-origin: center;
+  animation: float 15s ease-in-out infinite;
+  /* Enhanced glow effect */
+  box-shadow: 0 0 100px 20px rgba(157, 78, 221, 0.6);
+}
+
+.orb-1 {
+  width: 800px; /* Increased size */
+  height: 800px; /* Increased size */
+  top: -150px;
+  left: -150px;
+  animation-delay: 0s;
+  /* More saturated gradient */
+  background: radial-gradient(circle at 30% 40%, rgba(224, 170, 255, 1) 0%, rgba(157, 78, 221, 0.9) 30%, rgba(123, 44, 191, 0.4) 60%, rgba(123, 44, 191, 0) 70%);
+}
+
+.orb-2 {
+  width: 600px; /* Increased size */
+  height: 600px; /* Increased size */
+  top: 30%;
+  right: -120px;
+  animation-delay: -5s;
+  /* More saturated gradient */
+  background: radial-gradient(circle at 60% 30%, rgba(199, 125, 255, 1) 0%, rgba(157, 78, 221, 0.8) 40%, rgba(90, 24, 154, 0.4) 60%, rgba(90, 24, 154, 0) 70%);
+}
+
+.orb-3 {
+  width: 700px; /* Increased size */
+  height: 700px; /* Increased size */
+  bottom: -180px;
+  left: 30%;
+  animation-delay: -10s;
+  /* More saturated gradient */
+  background: radial-gradient(circle at 40% 50%, rgba(177, 74, 255, 1) 0%, rgba(157, 78, 221, 0.8) 35%, rgba(60, 9, 108, 0.4) 60%, rgba(60, 9, 108, 0) 70%);
+}
+
+/* New additional orb for more visual interest */
+.orb-4 {
+  width: 450px; /* Increased size */
+  height: 450px; /* Increased size */
+  top: 40%;
+  left: 15%;
+  animation-delay: -7s;
+  /* More saturated gradient */
+  background: radial-gradient(circle at 30% 30%, rgba(224, 170, 255, 1) 0%, rgba(157, 78, 221, 0.7) 40%, rgba(123, 44, 191, 0.3) 65%, rgba(123, 44, 191, 0) 75%);
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(157, 78, 221, 0.2) 1px, transparent 1px), /* Increased from 0.15 */
+    linear-gradient(90deg, rgba(157, 78, 221, 0.2) 1px, transparent 1px); /* Increased from 0.15 */
+  background-size: 40px 40px;
+  opacity: 0.7; /* Increased from 0.6 */
+}
+
+.noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjIiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIHNlZWQ9IjIiIHR5cGU9ImZyYWN0YWxOb2lzZSIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiPjwvZmVDb2xvck1hdHJpeD48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4wNSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIvPjwvc3ZnPg==');
+  opacity: 0.3; /* Increased from 0.2 */
+}
+
+/* Increase star brightness */
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 6s ease-in-out infinite;
+  box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.6); /* Add glow to stars */
+}
+
+/* Generate random star positions and sizes */
+.star:nth-child(3n+1) {
+  width: 3px; /* Increased from 2px */
+  height: 3px; /* Increased from 2px */
+}
+
+.star:nth-child(3n+2) {
+  width: 4px; /* Increased from 3px */
+  height: 4px; /* Increased from 3px */
+}
+
+.star:nth-child(3n+3) {
+  width: 2px; /* Increased from 1px */
+  height: 2px; /* Increased from 1px */
+}
+
+/* Generate delays for star animations */
+.star:nth-child(5n+1) { animation-delay: 0s; }
+.star:nth-child(5n+2) { animation-delay: 1s; }
+.star:nth-child(5n+3) { animation-delay: 2s; }
+.star:nth-child(5n+4) { animation-delay: 3s; }
+.star:nth-child(5n+5) { animation-delay: 4s; }
+
+/* Enhance animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: blur(35px);
+  }
+  50% {
+    transform: translateY(-40px) scale(1.05);
+    filter: blur(30px); /* Slightly sharper at peak */
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1; /* Increased from 0.8 */
+    transform: scale(1.2); /* Increased from 1 */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .orb-1 {
+    width: 450px; /* Increased from 400px */
+    height: 450px; /* Increased from 400px */
+  }
+  
+  .orb-2 {
+    width: 350px; /* Increased from 300px */
+    height: 350px; /* Increased from 300px */
+  }
+  
+  .orb-3 {
+    width: 400px; /* Increased from 350px */
+    height: 400px; /* Increased from 350px */
+  }
+
+  .orb-4 {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .grid-overlay {
+    background-size: 30px 30px;
+  }
+}
