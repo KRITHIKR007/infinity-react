@@ -27,7 +27,9 @@ const RegisterPage = () => {
       { name: "TALE REWIND (Story Writing)", fee: 199, venue: "FET", teamSize: "Individual" },
       { name: "JUST A MINUTE (JAM)", fee: 199, venue: "FET", teamSize: "Individual" },
       { name: "WAVE YOUR STORY (Speech Recital)", fee: 299, venue: "FET", teamSize: "Individual" },
-      { name: "SHORT FILM MAKING", fee: 599, venue: "FET", teamSize: "3-8 members" }
+      { name: "SHORT FILM MAKING", fee: 599, venue: "FET", teamSize: "3-8 members" },
+      { name: "CAPTURE THE MOMENT (Photography)", fee: 249, venue: "FET", teamSize: "Individual" },
+      { name: "MOTION FUSION (Videography)", fee: 399, venue: "FET", teamSize: "Individual or Duo" }
     ]
   };
 
