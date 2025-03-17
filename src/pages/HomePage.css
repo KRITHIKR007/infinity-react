@@ -1952,7 +1952,99 @@
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
-  background: linear-gradient(135deg, rgba(16, 0, 43, 0.9), rgba(36, 0, 70, 0.95)) center/cover no-repeat;
+  background: transparent; /* Remove background overlay to make main bg visible */
+}
+
+.simple-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, 
+    rgba(16, 0, 43, 0.5), 
+    rgba(36, 0, 70, 0.5));
+  z-index: 1;
+}
+
+.simple-hero .hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-2xl);
+  background: rgba(16, 0, 43, 0.7);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Logo positioning */
+.hero-logo {
+  position: absolute;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.hero-logo img {
+  filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+  max-height: 300px;
+  width: auto;
+}
+
+.hero-logo.fet-logo {
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-logo.cultural-logo {
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Responsive adjustments for logos */
+@media (max-width: 1200px) {
+  .hero-logo img {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-logo img {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-logo.fet-logo, 
+  .hero-logo.cultural-logo {
+    top: auto;
+    bottom: 40px;
+  }
+  
+  .hero-logo img {
+    max-height: 150px;
+  }
+  
+  .hero-logo.cultural-logo {
+    right: 20px;
+  }
+  
+  .hero-logo.fet-logo {
+    left: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-logo img {
+    max-height: 100px;
+  }
 }
 
 /* Add hero logos styling */
@@ -1996,19 +2088,6 @@
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)); /* Enhanced glow effect */
 }
 
-.simple-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, 
-    rgba(16, 0, 43, 0.85), 
-    rgba(36, 0, 70, 0.95));
-  z-index: 1;
-}
-
 .simple-hero.loaded {
   opacity: 1;
   transform: translateY(0);
@@ -2033,16 +2112,20 @@
 .hero-logo.fet-logo {
   position: absolute;
   top: 50%;
-  right: 70px; /* Increased from 40px for better right positioning */
+  right: 70px; /* Positioning on the right side */
   transform: translateY(-50%);
   z-index: 20; /* Higher z-index to ensure visibility */
 }
 
 .hero-logo.fet-logo img {
-  max-height: 350px; /* Larger logo size for better visibility */
+  max-height: 400px; /* Made larger as requested */
   width: auto;
   filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4)); /* Enhanced glow effect */
   transition: transform 0.3s ease;
+}
+
+.hero-logo.fet-logo img:hover {
+  transform: scale(1.02);
 }
 
 /* Center hero content and adjust for logo positioning */

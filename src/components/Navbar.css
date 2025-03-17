@@ -58,6 +58,26 @@
   margin-right: var(--space-sm);
 }
 
+/* Add rotating animation for the logo */
+.rotating-logo {
+  animation: rotate-logo 15s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Stop rotation on hover for better user experience */
+.rotating-logo:hover {
+  animation-play-state: paused;
+}
+
 .text-gradient {
   background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary-lighter) 100%);
   -webkit-background-clip: text;

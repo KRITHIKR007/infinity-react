@@ -1,0 +1,25 @@
+# Step 1: Prepare your project for deployment
+cd d:\infinity-react
+
+# Make sure all dependencies are installed
+npm install
+
+# Step 2: Install Vercel CLI globally if not already installed
+npm install -g vercel
+
+# Step 3: Login to Vercel (this will open a browser for authentication)
+vercel login
+
+# Step 4: Deploy your application
+vercel --prod
+
+# When prompted, answer the questions:
+# - Set up and deploy? Yes
+# - Which scope? Select your account/team
+# - Link to existing project? No
+# - What's your project name? infinity-2025
+# - In which directory is your code located? ./ (or just press Enter)
+# - Want to override the settings? No
+
+# Step 5: Your deployment URL will be displayed in the terminal
+# It will look like: https://infinity-2025.vercel.app

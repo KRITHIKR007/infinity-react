@@ -1,0 +1,38 @@
+# Install dependencies if not already installed
+npm install
+
+# Build your project locally to ensure it compiles without errors
+npm run build
+
+# Install Vercel CLI globally
+npm install -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy from project directory
+cd d:\infinity-react
+vercel
+
+# Follow the CLI prompts:
+# - Set up and deploy? Yes
+# - Which scope? Select your account
+# - Link to existing project? No
+# - What's your project name? infinity-2025
+# - In which directory is your code located? ./
+# - Want to override the settings? No
+
+## Step 3: Deploy to Vercel
+
+### Method 1: Deploy via Vercel Dashboard
+
+1. Go to [Vercel.com](https://vercel.com) and sign up/sign in (you can use GitHub for this)
+2. Click on "Add New..." > "Project"
+3. Import your GitHub repository
+4. Configure the project:
+   - Framework Preset: Create React App
+   - Build Command: `npm run build`
+   - Output Directory: `build`
+5. Click "Deploy"
+
+### Method 2: Deploy via Vercel CLI

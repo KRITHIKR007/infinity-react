@@ -1,0 +1,5 @@
+# Create directory structure
+mkdir -p src\assets\images
+
+# Copy the image to the proper location
+copy public\images\baground.png src\assets\images\

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Gallery from '../components/Gallery';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
@@ -28,7 +29,29 @@ const HomePage: React.FC = () => {
     <div className="home-page simple">
       {/* Simple Hero Section */}
       <section className={`simple-hero ${isLoaded ? 'loaded' : ''}`}>
-        {/* FET logo has been removed */}
+        {/* FET Logo on the left side */}
+        <div className="hero-logo fet-logo">
+          <img 
+            src="/images/FET-logoWhite.png" 
+            alt="FET Logo" 
+            onError={(e) => {
+              e.currentTarget.style.opacity = "0";
+              console.log("Failed to load FET logo");
+            }}
+          />
+        </div>
+        
+        {/* Cultural Logo on the right side */}
+        <div className="hero-logo cultural-logo">
+          <img 
+            src="/images/cultural logo.png" 
+            alt="Cultural Logo" 
+            onError={(e) => {
+              e.currentTarget.style.opacity = "0";
+              console.log("Failed to load Cultural logo");
+            }}
+          />
+        </div>
         
         <div className="hero-content">
           <h1 className="main-title">INFINITY-2K25</h1>
@@ -96,6 +119,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Gallery Section - New Addition */}
+      <Gallery />
 
       {/* Poster Scroll Section (keeping this as requested) */}
       <section className="poster-scroll-section">

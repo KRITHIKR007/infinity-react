@@ -1,7 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npx react-scripts build",
+  "buildCommand": "npm run build",
   "outputDirectory": "build",
+  "framework": "create-react-app",
   "rewrites": [
     {"source": "/(.*)", "destination": "/index.html"}
   ]
